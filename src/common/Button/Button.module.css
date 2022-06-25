@@ -1,0 +1,8 @@
+.button {
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    max-width: 200px;
+    max-height: 50px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}

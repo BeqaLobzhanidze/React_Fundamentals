@@ -1,0 +1,14 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid black;
+}
+.rightSide {
+    display: flex;
+    align-items: center;
+    margin-right: 25px;
+}
+.rightSide h3{
+    margin: 25px;
+}
