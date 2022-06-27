@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Button.module.css';
+import PropTypes from 'prop-types';
 
 function Button({ buttonText, onClick }) {
 	return (
@@ -8,5 +9,10 @@ function Button({ buttonText, onClick }) {
 		</button>
 	);
 }
+
+Button.propTypes = {
+	buttonText: PropTypes.string,
+	onClick: PropTypes.func,
+};
 
 export default Button;

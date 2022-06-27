@@ -8,7 +8,7 @@ function Header() {
 		<header className={styles.header}>
 			<Logo />
 			<div className={styles.rightSide}>
-				<h3>Beqa</h3> <Button buttonText='logout' />
+				<h3>Dave</h3> <Button buttonText='logout' />
 			</div>
 		</header>
 	);

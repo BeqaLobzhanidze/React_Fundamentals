@@ -3,7 +3,7 @@
     height: 250px;
     display: flex;
     border: 1px solid black;
-    margin: 0 auto;
+    margin: 20px auto;
     justify-content: space-between;
 }
 .leftSide {
@@ -27,4 +27,10 @@
 .rightSide div {
     width: 100%;
     text-align: start;
+}
+.authors {
+    margin: 0 5px;
+}
+.creationDate {
+    margin-right: 5px;
 }

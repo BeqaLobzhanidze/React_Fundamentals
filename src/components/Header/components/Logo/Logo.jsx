@@ -1,5 +1,6 @@
 import React from 'react';
 import url from './image/unnamed.jpg';
+import PropTypes from 'prop-types';
 
 function Logo({ width = 150, height = 150 }) {
 	return (
@@ -12,5 +13,10 @@ function Logo({ width = 150, height = 150 }) {
 		/>
 	);
 }
+
+Logo.propTypes = {
+	width: PropTypes.number,
+	height: PropTypes.number,
+};
 
 export default Logo;
