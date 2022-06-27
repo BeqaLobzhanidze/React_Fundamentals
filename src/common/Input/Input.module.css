@@ -1,0 +1,7 @@
+.input label {
+    display: block;
+}
+.input input {
+    width: 500px;
+    padding: 8px;
+}
