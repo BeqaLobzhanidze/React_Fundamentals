@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import styles from './SearchBar.module.css';
 import Button from '../../../../common/Button/Button';
 import Input from '../../../../common/Input/Input';
 import { SearchByNameOrId } from '../../../../helpers/searchByNameorId';
-import PropTypes from 'prop-types';
 
-function SearchBar({
+const SearchBar = ({
   copyCoursesList,
   setCopyCoursesList,
   setIsKeywordEmpty,
   coursesList,
-}) {
+}) => {
   const [keyword, setKeyword] = useState('');
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   return (
@@ -43,7 +43,7 @@ function SearchBar({
       </Link>
     </div>
   );
-}
+};
 
 SearchBar.propTypes = {
   copyCoursesList: PropTypes.array,

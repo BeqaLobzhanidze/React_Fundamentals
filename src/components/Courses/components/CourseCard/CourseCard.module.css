@@ -24,7 +24,7 @@
     justify-content: space-around;
     align-items: center;
 }
-.rightSide div {
+.rightSide p {
     width: 100%;
     text-align: start;
 }

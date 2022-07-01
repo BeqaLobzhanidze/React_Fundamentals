@@ -1,8 +1,9 @@
 import React from 'react';
-import url from './image/unnamed.jpg';
 import PropTypes from 'prop-types';
 
-function Logo({ width = 150, height = 150 }) {
+import url from './image/unnamed.jpg';
+
+const Logo = ({ width = 150, height = 150 }) => {
   return (
     <img
       src={url}
@@ -12,7 +13,7 @@ function Logo({ width = 150, height = 150 }) {
       style={{ width, height }}
     />
   );
-}
+};
 
 Logo.propTypes = {
   width: PropTypes.number,

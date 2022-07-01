@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import CreateCourse from './CreateCourse';
 
 const CreateCourseWrapper = ({
@@ -43,6 +45,12 @@ const CreateCourseWrapper = ({
       copyAuthorList={copyAuthorList}
     />
   );
+};
+
+CreateCourseWrapper.propTypes = {
+  authorsList: PropTypes.array,
+  setAuthorList: PropTypes.func,
+  setCoursesList: PropTypes.func,
 };
 
 export default CreateCourseWrapper;

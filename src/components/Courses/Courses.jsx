@@ -1,15 +1,16 @@
 import React from 'react';
-import CourseCard from './components/CourseCard/CourseCard';
 import PropTypes from 'prop-types';
 
-function Courses({
+import CourseCard from './components/CourseCard/CourseCard';
+
+const Courses = ({
   coursesList,
   authorsList,
   copyCoursesList,
   isKeywordEmpty,
-}) {
+}) => {
   return (
-    <div>
+    <>
       {isKeywordEmpty ? (
         <>
           {coursesList.map((courseCard) => (
@@ -31,9 +32,9 @@ function Courses({
           ))}
         </>
       )}
-    </div>
+    </>
   );
-}
+};
 
 Courses.propTypes = {
   coursesList: PropTypes.array,

@@ -1,9 +1,10 @@
 import React from 'react';
+
 import Button from '../../common/Button/Button';
 import Logo from './components/Logo/Logo';
 import styles from './Header.module.css';
 
-function Header() {
+const Header = () => {
   return (
     <header className={styles.header}>
       <Logo />
@@ -12,6 +13,6 @@ function Header() {
       </div>
     </header>
   );
-}
+};
 
 export default Header;

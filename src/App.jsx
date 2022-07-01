@@ -8,7 +8,7 @@ import { mockedAuthorsList, mockedCoursesList } from './constants';
 import Courses from './components/Courses/Courses';
 import CreateCourseWrapper from './components/CreateCourse/CreateCourseWrapper';
 
-function App() {
+const App = () => {
   const [coursesList, setCoursesList] = useState(mockedCoursesList);
   const [authorsList, setAuthorList] = useState(mockedAuthorsList);
   const [copyCoursesList, setCopyCoursesList] = useState(mockedCoursesList);
@@ -49,6 +49,6 @@ function App() {
       </Routes>
     </>
   );
-}
+};
 
 export default App;

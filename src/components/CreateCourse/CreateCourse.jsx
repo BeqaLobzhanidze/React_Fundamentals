@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './CreateCourse.module.css';
 import Button from '../../common/Button/Button';
@@ -7,12 +8,11 @@ import AuthorItem from './components/AuthorItem/AuthorItem';
 import { GetCourseDuration } from '../../helpers/getCourseDuration';
 import { CorrectAuthorsFormat } from '../../helpers/correctAuthorsFormat';
 import { DoubleAuthorCheck } from '../../helpers/doubleAuthorsCheck';
-import PropTypes from 'prop-types';
 import ConditionalLink from './utills/ConditionalLink';
 import { IsEmptyForm } from '../../helpers/isEmptyForm';
 import { GetExactCreationDate } from '../../helpers/getExactCreateDate';
 
-function CreateCourse({
+const CreateCourse = ({
   AddAuthor,
   DeleteAuthor,
   CreateAuthor,
@@ -22,7 +22,7 @@ function CreateCourse({
   customAuthor,
   setCustomAuthor,
   copyAuthorList,
-}) {
+}) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [duration, setDuration] = useState('');
@@ -78,8 +78,8 @@ function CreateCourse({
         />
       </div>
       <div className={styles.authorsCreation}>
-        <aside className={styles.leftAside}>
-          <div>
+        <div className={styles.leftAside}>
+          <>
             <h2>Add author</h2>
             <Input
               labelText='Author Name'
@@ -88,8 +88,8 @@ function CreateCourse({
               onChange={(e) => setCustomAuthor(e.target.value)}
             />
             <Button buttonText='create author' onClick={CreateAuthor} />
-          </div>
-          <div>
+          </>
+          <>
             <h2>Duration</h2>
             <Input
               labelText='Duration'
@@ -99,9 +99,9 @@ function CreateCourse({
               onChange={(e) => setDuration(e.target.value)}
             />
             <h4>Duration: {GetCourseDuration(duration)} hours</h4>
-          </div>
-        </aside>
-        <aside className={styles.rightAside}>
+          </>
+        </div>
+        <div className={styles.rightAside}>
           <div className={styles.auth}>
             <h2>Authors</h2>
             {copyAuthorList.map(({ name, id }) => (
@@ -123,15 +123,22 @@ function CreateCourse({
               <h5>authors list is empty</h5>
             )}
           </div>
-        </aside>
+        </div>
       </div>
     </section>
   );
-}
+};
+
 CreateCourse.propTypes = {
-  authorsList: PropTypes.array,
+  AddAuthor: PropTypes.func,
+  DeleteAuthor: PropTypes.func,
+  CreateCourse: PropTypes.func,
   setAuthorList: PropTypes.func,
   setCoursesList: PropTypes.func,
+  newCourseAuthors: PropTypes.array,
+  customAuthor: PropTypes.string,
+  setCustomAuthor: PropTypes.func,
+  copyAuthorList: PropTypes.array,
 };
 
 export default CreateCourse;

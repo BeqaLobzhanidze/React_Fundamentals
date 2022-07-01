@@ -1,8 +1,15 @@
 import React from 'react';
-import styles from './Input.module.css';
 import PropTypes from 'prop-types';
 
-function Input({ labelText, placeHolderText, onChange, value, type = 'text' }) {
+import styles from './Input.module.css';
+
+const Input = ({
+  labelText,
+  placeHolderText,
+  onChange,
+  value,
+  type = 'text',
+}) => {
   return (
     <div className={styles.input}>
       <label htmlFor='input'>{labelText}</label>
@@ -15,7 +22,7 @@ function Input({ labelText, placeHolderText, onChange, value, type = 'text' }) {
       />
     </div>
   );
-}
+};
 
 Input.propTypes = {
   labelText: PropTypes.string,
@@ -24,4 +31,4 @@ Input.propTypes = {
   value: PropTypes.string,
 };
 
-export default Input;
+export default React.memo(Input);
