@@ -1,9 +1,8 @@
 export const SearchByNameOrId = (List, searchKeyword) => {
-	console.log('search' + searchKeyword);
-	let keywordLowerCase = searchKeyword.toLowerCase();
+	const keywordLowerCase = searchKeyword.toLowerCase();
 	return List.filter((course) => {
-		let titleLower = course.title.toLowerCase();
-		let idLower = course.id.toLowerCase();
+		const titleLower = course.title.toLowerCase();
+		const idLower = course.id.toLowerCase();
 
 		return (
 			titleLower.includes(keywordLowerCase) ||

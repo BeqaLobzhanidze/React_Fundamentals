@@ -1,5 +1,5 @@
 export const CorrectAuthorsFormat = (list) => {
-	let result = [];
+	const result = [];
 	for (let author of list) {
 		result.push(author.id);
 	}

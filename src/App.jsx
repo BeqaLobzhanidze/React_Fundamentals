@@ -1,5 +1,7 @@
-import './App.css';
+import { Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
+
+import './App.css';
 import SearchBar from './components/Courses/components/SearchBar/SearchBar';
 import Header from './components/Header/Header';
 import { mockedAuthorsList, mockedCoursesList } from './constants';
@@ -10,39 +12,42 @@ function App() {
 	const [coursesList, setCoursesList] = useState(mockedCoursesList);
 	const [authorsList, setAuthorList] = useState(mockedAuthorsList);
 	const [copyCoursesList, setCopyCoursesList] = useState(mockedCoursesList);
-	const [haveNewCourse, setHaveNewCourse] = useState(false);
 	const [isKeywordEmpty, setIsKeywordEmpty] = useState(true);
-
-	console.log(isKeywordEmpty);
 	return (
-		<div className='App'>
+		<>
 			<Header />
-			{!haveNewCourse ? (
-				<>
-					<SearchBar
-						copyCoursesList={copyCoursesList}
-						setCopyCoursesList={setCopyCoursesList}
-						// setCoursesList={setCoursesList}
-						coursesList={coursesList}
-						setHaveNewCourse={setHaveNewCourse}
-						setIsKeywordEmpty={setIsKeywordEmpty}
-					/>
-					<Courses
-						coursesList={coursesList}
-						authorsList={authorsList}
-						copyCoursesList={copyCoursesList}
-						isKeywordEmpty={isKeywordEmpty}
-					/>
-				</>
-			) : (
-				<CreateCourse
-					authorsList={authorsList}
-					setAuthorList={setAuthorList}
-					setCoursesList={setCoursesList}
-					setHaveNewCourse={setHaveNewCourse}
+			<Routes>
+				<Route
+					path='/'
+					element={
+						<>
+							<SearchBar
+								copyCoursesList={copyCoursesList}
+								setCopyCoursesList={setCopyCoursesList}
+								coursesList={coursesList}
+								setIsKeywordEmpty={setIsKeywordEmpty}
+							/>
+							<Courses
+								coursesList={coursesList}
+								authorsList={authorsList}
+								copyCoursesList={copyCoursesList}
+								isKeywordEmpty={isKeywordEmpty}
+							/>
+						</>
+					}
 				/>
-			)}
-		</div>
+				<Route
+					path='/courseCreate'
+					element={
+						<CreateCourse
+							authorsList={authorsList}
+							setAuthorList={setAuthorList}
+							setCoursesList={setCoursesList}
+						/>
+					}
+				/>
+			</Routes>
+		</>
 	);
 }
 

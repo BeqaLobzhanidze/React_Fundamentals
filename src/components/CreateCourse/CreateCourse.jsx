@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import styles from './CreateCourse.module.css';
 import Button from '../../common/Button/Button';
 import Input from '../../common/Input/Input';
@@ -7,13 +8,11 @@ import { GetCourseDuration } from '../../helpers/getCourseDuration';
 import { CorrectAuthorsFormat } from '../../helpers/correctAuthorsFormat';
 import { DoubleAuthorCheck } from '../../helpers/doubleAuthorsCheck';
 import PropTypes from 'prop-types';
+import ConditionalLink from './utills/ConditionalLink';
+import { IsEmptyForm } from '../../helpers/isEmptyForm';
+import { GetExactCreationDate } from '../../helpers/getExactCreateDate';
 
-function CreateCourse({
-	authorsList,
-	setAuthorList,
-	setCoursesList,
-	setHaveNewCourse,
-}) {
+function CreateCourse({ authorsList, setAuthorList, setCoursesList }) {
 	const [customAuthor, setCustomAuthor] = useState('');
 	const [newCourseAuthors, setNewCourseAuthors] = useState([]);
 	const [copyAuthorList, setCopyAuthorList] = useState(authorsList);
@@ -42,18 +41,7 @@ function CreateCourse({
 	};
 
 	const CreateNewCourse = () => {
-		var today = new Date();
-		var dd = String(today.getDate()).padStart(2, '0');
-		var mm = String(today.getMonth() + 1).padStart(2, '0');
-		var yyyy = today.getFullYear();
-
-		today = mm + '.' + dd + '.' + yyyy;
-		if (
-			title.length < 2 ||
-			description.length < 2 ||
-			newCourseAuthors.length === 0 ||
-			duration <= 0
-		) {
+		if (IsEmptyForm(title, description, newCourseAuthors, duration)) {
 			alert('Fill form correctly');
 			return;
 		}
@@ -63,12 +51,11 @@ function CreateCourse({
 				id: Math.random().toString(36).substr(2, 9),
 				title,
 				description,
-				creationDate: today,
+				creationDate: GetExactCreationDate(),
 				duration: Number(duration),
 				authors: CorrectAuthorsFormat(newCourseAuthors),
 			},
 		]);
-		setHaveNewCourse(false);
 		setAuthorList((prevAuthor) => [
 			...prevAuthor,
 			...DoubleAuthorCheck(prevAuthor, newCourseAuthors),
@@ -84,7 +71,14 @@ function CreateCourse({
 					value={title}
 					onChange={(e) => setTitle(e.target.value)}
 				/>
-				<Button buttonText='Create Course' onClick={CreateNewCourse} />
+				<ConditionalLink
+					to='/'
+					condition={
+						!IsEmptyForm(title, description, newCourseAuthors, duration)
+					}
+				>
+					<Button buttonText='Create Course' onClick={CreateNewCourse} />
+				</ConditionalLink>
 			</div>
 			<div className={styles.textarea}>
 				<label>Description:</label>
@@ -151,7 +145,6 @@ CreateCourse.propTypes = {
 	authorsList: PropTypes.array,
 	setAuthorList: PropTypes.func,
 	setCoursesList: PropTypes.func,
-	setHaveNewCourse: PropTypes.func,
 };
 
 export default CreateCourse;

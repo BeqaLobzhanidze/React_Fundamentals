@@ -1,5 +1,5 @@
 export const GetAuthors = (authors, mockedAuthorsList) => {
-	let result = [];
+	const result = [];
 	for (let auth of authors) {
 		for (let authName of mockedAuthorsList) {
 			if (auth === authName.id) {

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import styles from './SearchBar.module.css';
 import Button from '../../../../common/Button/Button';
 import Input from '../../../../common/Input/Input';
@@ -8,7 +10,6 @@ import PropTypes from 'prop-types';
 function SearchBar({
 	copyCoursesList,
 	setCopyCoursesList,
-	setHaveNewCourse,
 	setIsKeywordEmpty,
 	coursesList,
 }) {
@@ -37,10 +38,9 @@ function SearchBar({
 					}}
 				/>
 			</div>
-			<Button
-				buttonText='Add new Course'
-				onClick={() => setHaveNewCourse(true)}
-			/>
+			<Link to='courseCreate'>
+				<Button buttonText='Add new Course' />
+			</Link>
 		</div>
 	);
 }
@@ -48,7 +48,6 @@ function SearchBar({
 SearchBar.propTypes = {
 	copyCoursesList: PropTypes.array,
 	setCopyCoursesList: PropTypes.func,
-	setHaveNewCourse: PropTypes.func,
 	setIsKeywordEmpty: PropTypes.func,
 	coursesList: PropTypes.array,
 };
