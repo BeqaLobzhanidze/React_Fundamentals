@@ -16,6 +16,7 @@
         "prettier"
     ],
     "rules": {
+        "indent": ["error", 2],
         "prettier/prettier": [
             "error", {
                 "printWidth": 80,
@@ -23,7 +24,7 @@
                 "semi": true,
                 "jsxSingleQuote": true,
                 "singleQuote": true,
-                "useTabs": true,
+                "useTabs": false,
                 "endOfLine": "auto",
                 "max-len": ["error", { "code": 80 }]
             }

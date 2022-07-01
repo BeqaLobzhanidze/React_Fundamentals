@@ -1,3 +1,3 @@
 export const FormatCreationDate = (date) => {
-	return date.replaceAll('/', '.');
+  return date.replaceAll('/', '.');
 };
