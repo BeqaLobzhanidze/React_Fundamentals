@@ -120,7 +120,7 @@ const CreateCourse = ({
                 />
               ))
             ) : (
-              <h5>authors list is empty</h5>
+              <p>authors list is empty</p>
             )}
           </div>
         </div>

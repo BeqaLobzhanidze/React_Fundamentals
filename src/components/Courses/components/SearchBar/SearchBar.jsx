@@ -7,14 +7,8 @@ import Button from '../../../../common/Button/Button';
 import Input from '../../../../common/Input/Input';
 import { SearchByNameOrId } from '../../../../helpers/searchByNameorId';
 
-const SearchBar = ({
-  copyCoursesList,
-  setCopyCoursesList,
-  setIsKeywordEmpty,
-  coursesList,
-}) => {
+const SearchBar = ({ copyCoursesList, setCopyCoursesList, coursesList }) => {
   const [keyword, setKeyword] = useState('');
-  const [isButtonClicked, setIsButtonClicked] = useState(false);
   return (
     <div className={styles.container}>
       <div className={styles.leftSide}>
@@ -23,18 +17,13 @@ const SearchBar = ({
           value={keyword}
           onChange={(e) => {
             setKeyword(e.target.value);
-            setIsKeywordEmpty(keyword !== '' ? false : true);
-            if (isButtonClicked) {
-              setCopyCoursesList(coursesList);
-              setIsButtonClicked(false);
-            }
+            if (!e.target.value) setCopyCoursesList(coursesList);
           }}
         />
         <Button
           buttonText='Search'
           onClick={() => {
             setCopyCoursesList(SearchByNameOrId(copyCoursesList, keyword));
-            setIsButtonClicked(true);
           }}
         />
       </div>
@@ -48,7 +37,6 @@ const SearchBar = ({
 SearchBar.propTypes = {
   copyCoursesList: PropTypes.array,
   setCopyCoursesList: PropTypes.func,
-  setIsKeywordEmpty: PropTypes.func,
   coursesList: PropTypes.array,
 };
 
