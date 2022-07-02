@@ -50,7 +50,7 @@ const CreateCourse = ({
   };
 
   return (
-    <section className={styles.container}>
+    <section className={styles.container} aria-label='CreateCourse'>
       <div className={styles.title}>
         <Input
           labelText='Title'
