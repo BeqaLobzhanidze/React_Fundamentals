@@ -1,18 +1,19 @@
 import React from 'react';
-import styles from './Button.module.css';
 import PropTypes from 'prop-types';
 
-function Button({ buttonText, onClick }) {
-	return (
-		<button onClick={onClick} className={styles.button}>
-			{buttonText}
-		</button>
-	);
-}
+import styles from './Button.module.css';
 
-Button.propTypes = {
-	buttonText: PropTypes.string,
-	onClick: PropTypes.func,
+const Button = ({ buttonText, onClick }) => {
+  return (
+    <button onClick={onClick} className={styles.button}>
+      {buttonText}
+    </button>
+  );
 };
 
-export default Button;
+Button.propTypes = {
+  buttonText: PropTypes.string,
+  onClick: PropTypes.func,
+};
+
+export default React.memo(Button);

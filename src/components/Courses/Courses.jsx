@@ -1,45 +1,35 @@
-import React from 'react';
-import CourseCard from './components/CourseCard/CourseCard';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-function Courses({
-	coursesList,
-	authorsList,
-	copyCoursesList,
-	isKeywordEmpty,
-}) {
-	return (
-		<div>
-			{isKeywordEmpty ? (
-				<>
-					{coursesList.map((courseCard) => (
-						<CourseCard
-							key={courseCard.id}
-							courseCard={courseCard}
-							authorsList={authorsList}
-						/>
-					))}
-				</>
-			) : (
-				<>
-					{copyCoursesList.map((courseCard) => (
-						<CourseCard
-							key={courseCard.id}
-							courseCard={courseCard}
-							authorsList={authorsList}
-						/>
-					))}
-				</>
-			)}
-		</div>
-	);
-}
+import CourseCard from './components/CourseCard/CourseCard';
+
+const Courses = ({
+  authorsList,
+  copyCoursesList,
+  setCopyCoursesList,
+  coursesList,
+}) => {
+  useEffect(() => {
+    setCopyCoursesList(coursesList);
+  }, []);
+  return (
+    <>
+      {copyCoursesList.map((courseCard) => (
+        <CourseCard
+          key={courseCard.id}
+          courseCard={courseCard}
+          authorsList={authorsList}
+        />
+      ))}
+    </>
+  );
+};
 
 Courses.propTypes = {
-	coursesList: PropTypes.array,
-	authorsList: PropTypes.array,
-	copyCoursesList: PropTypes.array,
-	isKeywordEmpty: PropTypes.bool,
+  authorsList: PropTypes.array,
+  copyCoursesList: PropTypes.array,
+  setCoursesList: PropTypes.func,
+  coursesList: PropTypes.array,
 };
 
 export default Courses;
