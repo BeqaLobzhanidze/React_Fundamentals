@@ -9,6 +9,7 @@ import { SearchByNameOrId } from '../../../../helpers/searchByNameorId';
 
 const SearchBar = ({ copyCoursesList, setCopyCoursesList, coursesList }) => {
   const [keyword, setKeyword] = useState('');
+
   return (
     <div className={styles.container}>
       <div className={styles.leftSide}>
@@ -27,7 +28,7 @@ const SearchBar = ({ copyCoursesList, setCopyCoursesList, coursesList }) => {
           }}
         />
       </div>
-      <Link to='courseCreate'>
+      <Link to='/courses/add'>
         <Button buttonText='Add new Course' />
       </Link>
     </div>

@@ -1,0 +1,38 @@
+.container {
+    width: 90%;
+    min-height: 500px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    margin: 15px auto;
+    justify-content: space-evenly;
+}
+.container a {
+    width: 200px;
+}
+.container h1 {
+    text-align: center;
+}
+.container button {
+    border: none;
+    margin-left: 25px;
+}
+.container .body {
+    display: flex;
+    justify-content: space-evenly;
+}
+.container .body .leftSide{
+    text-align: start;
+    width: 40%;
+}
+.container .body .rightSide{
+    text-align: start;
+    width: 30%;
+}
+.container .body .rightSide strong {
+    margin-right: 15px;
+}
+.authors {
+    margin-right: 10px;
+    display: block;
+}

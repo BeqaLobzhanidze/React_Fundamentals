@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
 import Button from '../../../../common/Button/Button';
 import styles from './CourseCard.module.css';
@@ -8,6 +9,7 @@ import { GetCourseDuration } from '../../../../helpers/getCourseDuration';
 import { GetAuthors } from '../../../../helpers/getAuthors';
 
 const CourseCard = ({ courseCard, authorsList }) => {
+  const navigate = useNavigate();
   return (
     <article className={styles.container}>
       <div className={styles.leftSide}>
@@ -30,7 +32,14 @@ const CourseCard = ({ courseCard, authorsList }) => {
           <strong className={styles.creationDate}>CreatinDate:</strong>
           {FormatCreationDate(courseCard.creationDate)}
         </p>
-        <Button buttonText='Show More' />
+        <Button
+          buttonText='Show More'
+          onClick={() =>
+            navigate(`../courses/${courseCard.id}`, {
+              state: { courseCard, authorsList },
+            })
+          }
+        />
       </div>
     </article>
   );
