@@ -59,7 +59,7 @@ const CreateCourse = ({
           onChange={(e) => setTitle(e.target.value)}
         />
         <ConditionalLink
-          to='/'
+          to='/courses'
           condition={
             !IsEmptyForm(title, description, newCourseAuthors, duration)
           }
