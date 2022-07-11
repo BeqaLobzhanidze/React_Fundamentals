@@ -34,11 +34,7 @@ const CourseCard = ({ courseCard, authorsList }) => {
         </p>
         <Button
           buttonText='Show More'
-          onClick={() =>
-            navigate(`../courses/${courseCard.id}`, {
-              state: { courseCard, authorsList },
-            })
-          }
+          onClick={() => navigate(`../courses/${courseCard.id}`)}
         />
       </div>
     </article>

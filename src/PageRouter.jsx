@@ -59,7 +59,7 @@ const PageRouter = () => {
         path={COURSESID}
         element={
           <AuthGuard>
-            <CourseInfo />
+            <CourseInfo courseList={coursesList} authorsList={authorsList} />
           </AuthGuard>
         }
       />
