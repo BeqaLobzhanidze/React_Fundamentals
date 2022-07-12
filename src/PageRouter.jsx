@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useSelector } from 'react-redux/es/exports';
 
 import SearchBar from './components/Courses/components/SearchBar/SearchBar';
 import { mockedAuthorsList, mockedCoursesList } from './constants';
@@ -19,9 +20,11 @@ import {
 } from './RouterConstants/constant';
 
 const PageRouter = () => {
-  const [coursesList, setCoursesList] = useState(mockedCoursesList);
-  const [authorsList, setAuthorList] = useState(mockedAuthorsList);
   const [copyCoursesList, setCopyCoursesList] = useState(mockedCoursesList);
+
+  const data = useSelector((state) => state);
+
+  console.log('data', data);
   return (
     <Routes>
       <Route path='/' element={<Navigate to={COURSES} />} />
@@ -32,11 +35,8 @@ const PageRouter = () => {
             <SearchBar
               copyCoursesList={copyCoursesList}
               setCopyCoursesList={setCopyCoursesList}
-              coursesList={coursesList}
             />
             <Courses
-              coursesList={coursesList}
-              authorsList={authorsList}
               copyCoursesList={copyCoursesList}
               setCopyCoursesList={setCopyCoursesList}
             />
@@ -47,11 +47,7 @@ const PageRouter = () => {
         path={COURSESADD}
         element={
           <AuthGuard>
-            <CreateCourseWrapper
-              authorsList={authorsList}
-              setAuthorList={setAuthorList}
-              setCoursesList={setCoursesList}
-            />
+            <CreateCourseWrapper />
           </AuthGuard>
         }
       />
@@ -59,7 +55,7 @@ const PageRouter = () => {
         path={COURSESID}
         element={
           <AuthGuard>
-            <CourseInfo courseList={coursesList} authorsList={authorsList} />
+            <CourseInfo />
           </AuthGuard>
         }
       />

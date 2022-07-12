@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux/es/exports';
 
 import styles from './SearchBar.module.css';
 import Button from '../../../../common/Button/Button';
 import Input from '../../../../common/Input/Input';
 import { SearchByNameOrId } from '../../../../helpers/searchByNameorId';
 
-const SearchBar = ({ copyCoursesList, setCopyCoursesList, coursesList }) => {
+const SearchBar = ({ copyCoursesList, setCopyCoursesList }) => {
   const [keyword, setKeyword] = useState('');
+  const courses = useSelector((state) => state.courses);
 
   return (
     <div className={styles.container}>
@@ -18,7 +20,7 @@ const SearchBar = ({ copyCoursesList, setCopyCoursesList, coursesList }) => {
           value={keyword}
           onChange={(e) => {
             setKeyword(e.target.value);
-            if (!e.target.value) setCopyCoursesList(coursesList);
+            if (!e.target.value) setCopyCoursesList(courses);
           }}
         />
         <Button

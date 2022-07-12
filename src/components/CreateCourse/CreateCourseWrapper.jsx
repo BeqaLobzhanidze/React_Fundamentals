@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux/es/exports';
 
 import CreateCourse from './CreateCourse';
 
-const CreateCourseWrapper = ({
-  authorsList,
-  setAuthorList,
-  setCoursesList,
-}) => {
+const CreateCourseWrapper = () => {
+  const authors = useSelector((state) => state.authors);
   const [newCourseAuthors, setNewCourseAuthors] = useState([]);
-  const [copyAuthorList, setCopyAuthorList] = useState(authorsList);
+  const [copyAuthorList, setCopyAuthorList] = useState(authors);
   const [customAuthor, setCustomAuthor] = useState('');
 
   const CreateAuthor = () => {
@@ -37,20 +34,12 @@ const CreateCourseWrapper = ({
       AddAuthor={AddAuthor}
       DeleteAuthor={DeleteAuthor}
       CreateAuthor={CreateAuthor}
-      setCoursesList={setCoursesList}
-      setAuthorList={setAuthorList}
       newCourseAuthors={newCourseAuthors}
       customAuthor={customAuthor}
       setCustomAuthor={setCustomAuthor}
       copyAuthorList={copyAuthorList}
     />
   );
-};
-
-CreateCourseWrapper.propTypes = {
-  authorsList: PropTypes.array,
-  setAuthorList: PropTypes.func,
-  setCoursesList: PropTypes.func,
 };
 
 export default CreateCourseWrapper;
