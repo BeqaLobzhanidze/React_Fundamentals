@@ -1,9 +1,9 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useState } from 'react';
-import { useSelector } from 'react-redux/es/exports';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import SearchBar from './components/Courses/components/SearchBar/SearchBar';
-import { mockedAuthorsList, mockedCoursesList } from './constants';
+import { mockedCoursesList } from './constants';
 import Courses from './components/Courses/Courses';
 import CreateCourseWrapper from './components/CreateCourse/CreateCourseWrapper';
 import Registration from './components/Registration/Registration';
@@ -18,13 +18,23 @@ import {
   REGISTRATION,
   LOGIN,
 } from './RouterConstants/constant';
+import { fetchApiServices } from './services';
+import { GetInitialCourses } from './store/courses/actions';
+import { GetInitialAuthors } from './store/authors/actions';
 
 const PageRouter = () => {
   const [copyCoursesList, setCopyCoursesList] = useState(mockedCoursesList);
+  const dispatch = useDispatch();
 
-  const data = useSelector((state) => state);
+  useEffect(() => {
+    fetchApiServices.GetAllCourses().then((data) => {
+      dispatch(GetInitialCourses(data));
+    });
+    fetchApiServices.GetAllAuthors().then((data) => {
+      dispatch(GetInitialAuthors(data));
+    });
+  }, []);
 
-  console.log('data', data);
   return (
     <Routes>
       <Route path='/' element={<Navigate to={COURSES} />} />

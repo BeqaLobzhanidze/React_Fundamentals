@@ -1,20 +1,14 @@
-import { LOGIN, LOGOUT, REGISTRATION } from './types';
+import { LOGIN, LOGOUT } from './types';
 
 const inisitalState = {
-  isAuth: false,
-  name: '',
+  isAuth: !!localStorage.getItem('TOKEN'),
+  name: localStorage.getItem('NAME'),
   email: '',
   token: '',
 };
 
 export const UserReducer = (state = inisitalState, action) => {
   switch (action.type) {
-    case REGISTRATION:
-      return {
-        ...state,
-        name: action.payload.name,
-        email: action.payload.email,
-      };
     case LOGIN:
       return {
         ...state,
@@ -23,7 +17,12 @@ export const UserReducer = (state = inisitalState, action) => {
         name: action.payload.name,
       };
     case LOGOUT:
-      return inisitalState;
+      return {
+        isAuth: false,
+        token: '',
+        name: '',
+        email: '',
+      };
     default:
       return state;
   }

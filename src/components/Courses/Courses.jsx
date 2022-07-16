@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux/es/exports';
+import { useSelector } from 'react-redux';
 
 import CourseCard from './components/CourseCard/CourseCard';
 
@@ -8,11 +8,14 @@ const Courses = ({ copyCoursesList, setCopyCoursesList }) => {
   const courses = useSelector((state) => state.courses);
   useEffect(() => {
     setCopyCoursesList(courses);
-  }, []);
+  }, [courses]);
+
   return (
     <>
       {copyCoursesList.map((courseCard) => (
-        <CourseCard key={courseCard.id} courseCard={courseCard} />
+        <>
+          <CourseCard key={courseCard.id} courseCard={courseCard} />
+        </>
       ))}
     </>
   );

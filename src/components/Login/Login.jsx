@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import Button from '../../common/Button/Button';
 import Input from '../../common/Input/Input';
@@ -11,10 +12,11 @@ const Login = () => {
   const [user, setUser] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   return (
     <form
       className={styles.container}
-      onSubmit={(e) => LoginUser(e, navigate, user, setError)}
+      onSubmit={(e) => LoginUser(e, navigate, user, setError, dispatch)}
     >
       <h1>Login</h1>
       <Input
