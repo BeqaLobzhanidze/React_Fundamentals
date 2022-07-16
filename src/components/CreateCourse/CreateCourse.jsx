@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './CreateCourse.module.css';
 import Button from '../../common/Button/Button';
@@ -11,13 +12,13 @@ import { DoubleAuthorCheck } from '../../helpers/doubleAuthorsCheck';
 import ConditionalLink from './utills/ConditionalLink';
 import { IsEmptyForm } from '../../helpers/isEmptyForm';
 import { GetExactCreationDate } from '../../helpers/getExactCreateDate';
+import { AddCourses } from '../../store/courses/actions';
+import { AddAuthors } from '../../store/authors/actions';
 
 const CreateCourse = ({
   AddAuthor,
   DeleteAuthor,
   CreateAuthor,
-  setCoursesList,
-  setAuthorList,
   newCourseAuthors,
   customAuthor,
   setCustomAuthor,
@@ -27,26 +28,25 @@ const CreateCourse = ({
   const [description, setDescription] = useState('');
   const [duration, setDuration] = useState('');
 
+  const dispatch = useDispatch();
+  const authors = useSelector((state) => state.authors);
+
   const CreateNewCourse = () => {
     if (IsEmptyForm(title, description, newCourseAuthors, duration)) {
       alert('Fill form correctly');
       return;
     }
-    setCoursesList((prevCourses) => [
-      ...prevCourses,
-      {
+    dispatch(
+      AddCourses({
         id: Math.random().toString(36).substr(2, 9),
         title,
         description,
         creationDate: GetExactCreationDate(),
         duration: Number(duration),
         authors: CorrectAuthorsFormat(newCourseAuthors),
-      },
-    ]);
-    setAuthorList((prevAuthor) => [
-      ...prevAuthor,
-      ...DoubleAuthorCheck(prevAuthor, newCourseAuthors),
-    ]);
+      })
+    );
+    dispatch(AddAuthors(...DoubleAuthorCheck(authors, newCourseAuthors)));
   };
 
   return (
@@ -133,8 +133,6 @@ CreateCourse.propTypes = {
   AddAuthor: PropTypes.func,
   DeleteAuthor: PropTypes.func,
   CreateCourse: PropTypes.func,
-  setAuthorList: PropTypes.func,
-  setCoursesList: PropTypes.func,
   newCourseAuthors: PropTypes.array,
   customAuthor: PropTypes.string,
   setCustomAuthor: PropTypes.func,

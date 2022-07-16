@@ -1,0 +1,3 @@
+export const ADD_COURSES = 'ADD_COURSES';
+export const DELETE_COURSES = 'DELETE_COURSES';
+export const INITIAL_VALUE = 'INITIAL_VALUE';

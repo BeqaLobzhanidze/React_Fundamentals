@@ -1,8 +1,9 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import SearchBar from './components/Courses/components/SearchBar/SearchBar';
-import { mockedAuthorsList, mockedCoursesList } from './constants';
+import { mockedCoursesList } from './constants';
 import Courses from './components/Courses/Courses';
 import CreateCourseWrapper from './components/CreateCourse/CreateCourseWrapper';
 import Registration from './components/Registration/Registration';
@@ -17,11 +18,23 @@ import {
   REGISTRATION,
   LOGIN,
 } from './RouterConstants/constant';
+import { fetchApiServices } from './services';
+import { GetInitialCourses } from './store/courses/actions';
+import { GetInitialAuthors } from './store/authors/actions';
 
 const PageRouter = () => {
-  const [coursesList, setCoursesList] = useState(mockedCoursesList);
-  const [authorsList, setAuthorList] = useState(mockedAuthorsList);
   const [copyCoursesList, setCopyCoursesList] = useState(mockedCoursesList);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    fetchApiServices.GetAllCourses().then((data) => {
+      dispatch(GetInitialCourses(data));
+    });
+    fetchApiServices.GetAllAuthors().then((data) => {
+      dispatch(GetInitialAuthors(data));
+    });
+  }, []);
+
   return (
     <Routes>
       <Route path='/' element={<Navigate to={COURSES} />} />
@@ -32,11 +45,8 @@ const PageRouter = () => {
             <SearchBar
               copyCoursesList={copyCoursesList}
               setCopyCoursesList={setCopyCoursesList}
-              coursesList={coursesList}
             />
             <Courses
-              coursesList={coursesList}
-              authorsList={authorsList}
               copyCoursesList={copyCoursesList}
               setCopyCoursesList={setCopyCoursesList}
             />
@@ -47,11 +57,7 @@ const PageRouter = () => {
         path={COURSESADD}
         element={
           <AuthGuard>
-            <CreateCourseWrapper
-              authorsList={authorsList}
-              setAuthorList={setAuthorList}
-              setCoursesList={setCoursesList}
-            />
+            <CreateCourseWrapper />
           </AuthGuard>
         }
       />
@@ -59,7 +65,7 @@ const PageRouter = () => {
         path={COURSESID}
         element={
           <AuthGuard>
-            <CourseInfo courseList={coursesList} authorsList={authorsList} />
+            <CourseInfo />
           </AuthGuard>
         }
       />

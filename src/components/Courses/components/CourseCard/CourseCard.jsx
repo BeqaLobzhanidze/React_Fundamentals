@@ -1,15 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux/es/exports';
 
 import Button from '../../../../common/Button/Button';
 import styles from './CourseCard.module.css';
 import { FormatCreationDate } from '../../../../helpers/formatCreationDate';
 import { GetCourseDuration } from '../../../../helpers/getCourseDuration';
 import { GetAuthors } from '../../../../helpers/getAuthors';
+import { DeleteCourses } from '../../../../store/courses/actions';
 
-const CourseCard = ({ courseCard, authorsList }) => {
+const CourseCard = ({ courseCard }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const authors = useSelector((state) => state.authors);
   return (
     <article className={styles.container}>
       <div className={styles.leftSide}>
@@ -19,7 +23,7 @@ const CourseCard = ({ courseCard, authorsList }) => {
       <div className={styles.rightSide}>
         <p>
           <strong>Authors:</strong>
-          {GetAuthors(courseCard.authors, authorsList).map((authors) => (
+          {GetAuthors(courseCard.authors, authors).map((authors) => (
             <span key={authors} className={styles.authors}>
               {authors}
             </span>
@@ -32,10 +36,17 @@ const CourseCard = ({ courseCard, authorsList }) => {
           <strong className={styles.creationDate}>CreatinDate:</strong>
           {FormatCreationDate(courseCard.creationDate)}
         </p>
-        <Button
-          buttonText='Show More'
-          onClick={() => navigate(`../courses/${courseCard.id}`)}
-        />
+        <div className={styles.buttons}>
+          <Button
+            buttonText='Show More'
+            onClick={() => navigate(`../courses/${courseCard.id}`)}
+          />
+          <Button
+            buttonText='Delete'
+            onClick={() => dispatch(DeleteCourses(courseCard.id))}
+          />
+          <Button buttonText='Update' />
+        </div>
       </div>
     </article>
   );
@@ -43,7 +54,6 @@ const CourseCard = ({ courseCard, authorsList }) => {
 
 CourseCard.propTypes = {
   courseCard: PropTypes.object,
-  authorsList: PropTypes.array,
 };
 
 export default CourseCard;

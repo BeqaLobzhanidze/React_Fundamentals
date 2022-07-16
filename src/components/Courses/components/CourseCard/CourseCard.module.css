@@ -34,3 +34,9 @@
 .creationDate {
     margin-right: 5px;
 }
+.buttons {
+    display: flex;
+}
+.buttons button {
+    margin: 0 5px;
+}

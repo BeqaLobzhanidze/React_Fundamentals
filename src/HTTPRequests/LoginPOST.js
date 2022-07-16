@@ -1,4 +1,6 @@
-export const LoginUser = async (e, navigate, user, setError) => {
+import { Login } from '../store/user/actions';
+
+export const LoginUser = async (e, navigate, user, setError, dispatch) => {
   e.preventDefault();
   try {
     const response = await fetch('http://localhost:4000/login', {
@@ -21,8 +23,11 @@ export const LoginUser = async (e, navigate, user, setError) => {
     if (localStorage.getItem('NAME')) localStorage.removeItem('NAME');
     localStorage.setItem('NAME', result.user.name);
 
+    dispatch(Login({ token: result.result, name: result.user.name }));
+
     if (result.successful) navigate('../courses');
   } catch (error) {
     setError('Invalid Post request');
+    localStorage.removeItem('TOKEN');
   }
 };

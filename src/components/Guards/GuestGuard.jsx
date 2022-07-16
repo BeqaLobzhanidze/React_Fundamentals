@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { COURSES } from '../../RouterConstants/constant';
 
 const GuestGuard = ({ children }) => {
-  if (localStorage.getItem('TOKEN')) {
+  const { isAuth } = useSelector((state) => state.user);
+  if (isAuth) {
     return <Navigate to={COURSES} />;
   }
   return <div>{children}</div>;

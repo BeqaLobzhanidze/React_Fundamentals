@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux/es/exports';
 
 import Button from '../../common/Button/Button';
 import { FormatCreationDate } from '../../helpers/formatCreationDate';
@@ -8,14 +9,20 @@ import { GetCourseDuration } from '../../helpers/getCourseDuration';
 import styles from './CourseInfo.module.css';
 import { COURSES } from '../../RouterConstants/constant';
 
-const CourseInfo = ({ courseList, authorsList }) => {
+const CourseInfo = () => {
   const { courseId } = useParams();
+  const courses = useSelector((state) => state.courses);
+  const authors = useSelector((state) => state.authors);
   return (
     <>
-      {courseList
+      {courses
         .filter((courses) => courses.id === courseId)
         .map((course) => (
-          <section className={styles.container} aria-label='CourseInfo'>
+          <section
+            className={styles.container}
+            aria-label='CourseInfo'
+            key={course.id}
+          >
             <Link to={COURSES}>
               <Button buttonText='< Back to Course' />
             </Link>
@@ -37,7 +44,7 @@ const CourseInfo = ({ courseList, authorsList }) => {
                 </p>
                 <p>
                   <strong>Authors:</strong>
-                  {GetAuthors(course.authors, authorsList).map((authors) => (
+                  {GetAuthors(course.authors, authors).map((authors) => (
                     <span key={authors} className={styles.authors}>
                       {authors}
                     </span>
