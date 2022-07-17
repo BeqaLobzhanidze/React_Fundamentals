@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import SearchBar from './components/Courses/components/SearchBar/SearchBar';
-import { mockedCoursesList } from './constants';
+// import { mockedCoursesList } from './constants';
 import Courses from './components/Courses/Courses';
 import CreateCourseWrapper from './components/CreateCourse/CreateCourseWrapper';
 import Registration from './components/Registration/Registration';
@@ -23,7 +23,7 @@ import { GetInitialCourses } from './store/courses/actions';
 import { GetInitialAuthors } from './store/authors/actions';
 
 const PageRouter = () => {
-  const [copyCoursesList, setCopyCoursesList] = useState(mockedCoursesList);
+  const [copyCoursesList, setCopyCoursesList] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
