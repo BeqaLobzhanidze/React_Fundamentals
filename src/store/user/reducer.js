@@ -5,7 +5,10 @@ const inisitalState = {
   name: localStorage.getItem('NAME'),
   email: '',
   token: '',
+  role: '',
 };
+
+//add later role in logout action
 
 export const UserReducer = (state = inisitalState, action) => {
   switch (action.type) {

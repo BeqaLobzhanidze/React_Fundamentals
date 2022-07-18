@@ -1,19 +1,25 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux/es/exports';
+import { useSelector, useDispatch } from 'react-redux/es/exports';
+import { AddAuthors } from '../../store/authors/actions';
 
 import CreateCourse from './CreateCourse';
 
 const CreateCourseWrapper = () => {
   const authors = useSelector((state) => state.authors);
+  const dispatch = useDispatch();
   const [newCourseAuthors, setNewCourseAuthors] = useState([]);
   const [copyAuthorList, setCopyAuthorList] = useState(authors);
   const [customAuthor, setCustomAuthor] = useState('');
 
   const CreateAuthor = () => {
+    const id = '66cc289e-6de9-49b2-9ca7-8b4f409d6467';
     setCopyAuthorList((prevAuthor) => [
       ...prevAuthor,
-      { name: customAuthor, id: Math.random().toString(36).substr(2, 9) },
+      { name: customAuthor, id },
     ]);
+
+    dispatch(AddAuthors({ name: customAuthor, id }));
+
     setCustomAuthor('');
   };
 
