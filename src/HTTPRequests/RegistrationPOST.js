@@ -1,4 +1,4 @@
-export const RegisterUser = async (e, navigate, user, setError) => {
+export const registerUser = async (e, navigate, user, setError) => {
   e.preventDefault();
   try {
     const response = await fetch('http://localhost:4000/register', {

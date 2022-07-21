@@ -1,4 +1,4 @@
-export const IsEmptyForm = (title, description, list, duration) => {
+export const isEmptyForm = (title, description, list, duration) => {
   return (
     title.length < 2 ||
     description.length < 2 ||

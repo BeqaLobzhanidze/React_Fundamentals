@@ -1,4 +1,4 @@
-export const SearchByNameOrId = (List, searchKeyword) => {
+export const searchByNameOrId = (List, searchKeyword) => {
   const keywordLowerCase = searchKeyword.toLowerCase();
   return List.filter((course) => {
     const titleLower = course.title.toLowerCase();

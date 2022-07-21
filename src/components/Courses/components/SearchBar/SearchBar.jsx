@@ -6,11 +6,12 @@ import { useSelector } from 'react-redux/es/exports';
 import styles from './SearchBar.module.css';
 import Button from '../../../../common/Button/Button';
 import Input from '../../../../common/Input/Input';
-import { SearchByNameOrId } from '../../../../helpers/searchByNameorId';
+import { searchByNameOrId } from '../../../../helpers/searchByNameorId';
 
 const SearchBar = ({ copyCoursesList, setCopyCoursesList }) => {
   const [keyword, setKeyword] = useState('');
   const courses = useSelector((state) => state.courses);
+  const user = useSelector((state) => state.user);
 
   return (
     <div className={styles.container}>
@@ -26,13 +27,15 @@ const SearchBar = ({ copyCoursesList, setCopyCoursesList }) => {
         <Button
           buttonText='Search'
           onClick={() => {
-            setCopyCoursesList(SearchByNameOrId(copyCoursesList, keyword));
+            setCopyCoursesList(searchByNameOrId(copyCoursesList, keyword));
           }}
         />
       </div>
-      <Link to='/courses/add'>
-        <Button buttonText='Add new Course' />
-      </Link>
+      {user.name === 'null' || user.role === 'admin' ? (
+        <Link to='/courses/add'>
+          <Button buttonText='Add new Course' />
+        </Link>
+      ) : null}
     </div>
   );
 };

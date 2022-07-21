@@ -5,16 +5,16 @@ import { useSelector } from 'react-redux';
 
 import { COURSES } from '../../RouterConstants/constant';
 
-const GuestGuard = ({ children }) => {
-  const user = useSelector((state) => state.user);
-  if (user.isAuth) {
+const PrivateRoute = ({ children }) => {
+  const { role } = useSelector((state) => state.user);
+  if (role !== 'admin') {
     return <Navigate to={COURSES} />;
   }
   return <div>{children}</div>;
 };
 
-GuestGuard.propTypes = {
+PrivateRoute.propTypes = {
   children: PropTypes.node,
 };
 
-export default GuestGuard;
+export default PrivateRoute;

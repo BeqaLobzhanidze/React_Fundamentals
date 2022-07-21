@@ -1,4 +1,4 @@
-export const GetCourseDuration = (num) => {
+export const getCourseDuration = (num) => {
   const minutes = num % 60;
   const hours = (num - minutes) / 60;
   const prefixH = hours < 10 ? '0' : '';
