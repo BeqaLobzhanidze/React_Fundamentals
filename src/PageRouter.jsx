@@ -1,11 +1,9 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 
 import SearchBar from './components/Courses/components/SearchBar/SearchBar';
-// import { mockedCoursesList } from './constants';
 import Courses from './components/Courses/Courses';
-import CreateCourseWrapper from './components/CreateCourse/CreateCourseWrapper';
+import CourseFormContainer from './components/CourseForm/CourseFormContainer';
 import Registration from './components/Registration/Registration';
 import Login from './components/Login/Login';
 import CourseInfo from './components/CourseInfo/CourseInfo';
@@ -17,24 +15,12 @@ import {
   COURSESID,
   REGISTRATION,
   LOGIN,
+  UPDATE_COURSE_ID,
 } from './RouterConstants/constant';
-import { fetchApiServices } from './services';
-import { GetInitialCourses } from './store/courses/actions';
-import { GetInitialAuthors } from './store/authors/actions';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 const PageRouter = () => {
   const [copyCoursesList, setCopyCoursesList] = useState([]);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    fetchApiServices.GetAllCourses().then((data) => {
-      dispatch(GetInitialCourses(data));
-    });
-    fetchApiServices.GetAllAuthors().then((data) => {
-      dispatch(GetInitialAuthors(data));
-    });
-  }, []);
-
   return (
     <Routes>
       <Route path='/' element={<Navigate to={COURSES} />} />
@@ -42,14 +28,16 @@ const PageRouter = () => {
         path={COURSES}
         element={
           <AuthGuard>
-            <SearchBar
-              copyCoursesList={copyCoursesList}
-              setCopyCoursesList={setCopyCoursesList}
-            />
-            <Courses
-              copyCoursesList={copyCoursesList}
-              setCopyCoursesList={setCopyCoursesList}
-            />
+            <>
+              <SearchBar
+                copyCoursesList={copyCoursesList}
+                setCopyCoursesList={setCopyCoursesList}
+              />
+              <Courses
+                copyCoursesList={copyCoursesList}
+                setCopyCoursesList={setCopyCoursesList}
+              />
+            </>
           </AuthGuard>
         }
       />
@@ -57,7 +45,9 @@ const PageRouter = () => {
         path={COURSESADD}
         element={
           <AuthGuard>
-            <CreateCourseWrapper />
+            <PrivateRoute>
+              <CourseFormContainer />
+            </PrivateRoute>
           </AuthGuard>
         }
       />
@@ -65,7 +55,19 @@ const PageRouter = () => {
         path={COURSESID}
         element={
           <AuthGuard>
-            <CourseInfo />
+            <PrivateRoute>
+              <CourseInfo />
+            </PrivateRoute>
+          </AuthGuard>
+        }
+      />
+      <Route
+        path={UPDATE_COURSE_ID}
+        element={
+          <AuthGuard>
+            <PrivateRoute>
+              <CourseFormContainer needUpdate={true} />
+            </PrivateRoute>
           </AuthGuard>
         }
       />

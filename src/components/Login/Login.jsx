@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import Button from '../../common/Button/Button';
 import Input from '../../common/Input/Input';
-import { LoginUser } from '../../HTTPRequests/LoginPOST';
+import { loginUser } from '../../HTTPRequests/loginPOST';
 import styles from './Login.module.css';
 import { REGISTRATION } from '../../RouterConstants/constant';
 
@@ -16,7 +16,9 @@ const Login = () => {
   return (
     <form
       className={styles.container}
-      onSubmit={(e) => LoginUser(e, navigate, user, setError, dispatch)}
+      onSubmit={(e) => {
+        loginUser(e, navigate, user, setError, dispatch);
+      }}
     >
       <h1>Login</h1>
       <Input

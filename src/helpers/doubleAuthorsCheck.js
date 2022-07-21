@@ -1,4 +1,4 @@
-export const DoubleAuthorCheck = (prevAuthors, ActualAuthors) => {
+export const doubleAuthorCheck = (prevAuthors, ActualAuthors) => {
   const result = [];
   let check = true;
   for (let actualAuthor of ActualAuthors) {

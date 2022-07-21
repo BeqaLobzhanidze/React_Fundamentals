@@ -1,21 +1,29 @@
-import axios from 'axios';
+import { GetInitialAuthors } from './store/authors/actions';
+import { GetInitialCourses } from './store/courses/actions';
+
 export const fetchApiServices = {
-  GetAllCourses: function () {
-    try {
-      return axios
-        .get('http://localhost:4000/courses/all')
-        .then((data) => data.data.result);
-    } catch (error) {
-      throw new Error(error);
-    }
+  GetAllCourses: () => {
+    return async function (dispatch) {
+      const response = await fetch('http://localhost:4000/courses/all', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const result = await response.json();
+      dispatch(GetInitialCourses(result.result));
+    };
   },
-  GetAllAuthors: function () {
-    try {
-      return axios
-        .get('http://localhost:4000/authors/all')
-        .then((data) => data.data.result);
-    } catch (error) {
-      throw new Error(error);
-    }
+  GetAllAuthors: () => {
+    return async function (dispatch) {
+      const response = await fetch('http://localhost:4000/authors/all', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const result = await response.json();
+      dispatch(GetInitialAuthors(result.result));
+    };
   },
 };

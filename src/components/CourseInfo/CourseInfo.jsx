@@ -3,9 +3,9 @@ import { Link, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux/es/exports';
 
 import Button from '../../common/Button/Button';
-import { FormatCreationDate } from '../../helpers/formatCreationDate';
-import { GetAuthors } from '../../helpers/getAuthors';
-import { GetCourseDuration } from '../../helpers/getCourseDuration';
+import { formatCreationDate } from '../../helpers/formatCreationDate';
+import { getAuthors } from '../../helpers/getAuthors';
+import { getCourseDuration } from '../../helpers/getCourseDuration';
 import styles from './CourseInfo.module.css';
 import { COURSES } from '../../RouterConstants/constant';
 
@@ -36,15 +36,15 @@ const CourseInfo = () => {
                 </p>
                 <p>
                   <strong>Duration</strong>
-                  {GetCourseDuration(course.duration)} hours
+                  {getCourseDuration(course.duration)} hours
                 </p>
                 <p>
                   <strong>Created</strong>
-                  {FormatCreationDate(course.creationDate)}
+                  {formatCreationDate(course.creationDate)}
                 </p>
                 <p>
                   <strong>Authors:</strong>
-                  {GetAuthors(course.authors, authors).map((authors) => (
+                  {getAuthors(course.authors, authors).map((authors) => (
                     <span key={authors} className={styles.authors}>
                       {authors}
                     </span>

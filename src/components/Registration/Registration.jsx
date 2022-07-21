@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import Button from '../../common/Button/Button';
 import Input from '../../common/Input/Input';
-import { RegisterUser } from '../../HTTPRequests/RegistrationPOST';
+import { registerUser } from '../../HTTPRequests/registrationPOST';
 import styles from './Registration.module.css';
 import { LOGIN } from '../../RouterConstants/constant';
 
@@ -15,7 +15,7 @@ const Registration = () => {
   return (
     <form
       className={styles.container}
-      onSubmit={(e) => RegisterUser(e, navigate, user, setError)}
+      onSubmit={(e) => registerUser(e, navigate, user, setError)}
     >
       <h1>Registration</h1>
       <Input

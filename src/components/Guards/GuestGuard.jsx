@@ -6,8 +6,8 @@ import { useSelector } from 'react-redux';
 import { COURSES } from '../../RouterConstants/constant';
 
 const GuestGuard = ({ children }) => {
-  const { isAuth } = useSelector((state) => state.user);
-  if (isAuth) {
+  const user = useSelector((state) => state.user);
+  if (user.isAuth) {
     return <Navigate to={COURSES} />;
   }
   return <div>{children}</div>;
