@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux/es/exports';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Button from '../../../../common/Button/Button';
 import styles from './CourseCard.module.css';
@@ -18,7 +18,7 @@ const CourseCard = ({ courseCard }) => {
   return (
     <article className={styles.container}>
       <div className={styles.leftSide}>
-        <h2>{courseCard.title}</h2>
+        <h2 data-id='title'>{courseCard.title}</h2>
         <p>{courseCard.description}</p>
       </div>
       <div className={styles.rightSide}>
@@ -31,7 +31,10 @@ const CourseCard = ({ courseCard }) => {
           ))}
         </p>
         <p>
-          <strong>Duration:</strong> {getCourseDuration(courseCard.duration)}
+          <strong>Duration:</strong>
+          <span data-testid='duration'>
+            {getCourseDuration(courseCard.duration)}
+          </span>
         </p>
         <p>
           <strong className={styles.creationDate}>CreatinDate:</strong>

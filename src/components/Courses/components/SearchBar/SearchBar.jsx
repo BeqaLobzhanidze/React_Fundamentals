@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux/es/exports';
+import { useSelector } from 'react-redux';
 
 import styles from './SearchBar.module.css';
 import Button from '../../../../common/Button/Button';
@@ -32,7 +32,7 @@ const SearchBar = ({ copyCoursesList, setCopyCoursesList }) => {
         />
       </div>
       {user.name === 'null' || user.role === 'admin' ? (
-        <Link to='/courses/add'>
+        <Link to='/courses/add' data-testid='addcourse'>
           <Button buttonText='Add new Course' />
         </Link>
       ) : null}

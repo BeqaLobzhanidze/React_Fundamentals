@@ -4,9 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import CourseCard from './components/CourseCard/CourseCard';
 import { fetchApiServices } from '../../services';
-import { GetInitialAuthors } from '../../store/authors/actions';
-import { GetInitialCourses } from '../../store/courses/actions';
-// import { getUserRole, UserMeGet } from '../../HTTPRequests/UserMeGet';
 
 const Courses = ({ copyCoursesList, setCopyCoursesList }) => {
   const courses = useSelector((state) => state.courses);
