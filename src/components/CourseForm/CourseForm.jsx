@@ -98,12 +98,14 @@ const CourseForm = ({
         )
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <section
       className={styles.container}
       aria-label='Form to create new Course'
+      data-testid='section'
     >
       <div className={styles.title}>
         <Input

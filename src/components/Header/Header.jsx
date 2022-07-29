@@ -28,7 +28,7 @@ const Header = () => {
       {user.isAuth ? (
         <>
           <div className={styles.rightSide}>
-            <h3>{adminHeader(user.name)}</h3>
+            <h3 data-testid='header-1'>{adminHeader(user.name)}</h3>
             <Button
               buttonText='logout'
               onClick={() => {
