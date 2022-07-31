@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
+import { loginUser } from '../../store/user/thunk';
 import Button from '../../common/Button/Button';
 import Input from '../../common/Input/Input';
-import { loginUser } from '../../HTTPRequests/loginPOST';
 import styles from './Login.module.css';
 import { REGISTRATION } from '../../RouterConstants/constant';
 
@@ -13,11 +13,12 @@ const Login = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   return (
     <form
       className={styles.container}
       onSubmit={(e) => {
-        loginUser(e, navigate, user, setError, dispatch);
+        dispatch(loginUser(e, navigate, user, setError));
       }}
     >
       <h1>Login</h1>
