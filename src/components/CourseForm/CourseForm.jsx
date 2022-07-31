@@ -14,9 +14,8 @@ import ConditionalLink from './utills/ConditionalLink';
 import { isEmptyForm } from '../../helpers/isEmptyForm';
 import { getAuthors } from '../../helpers/getAuthors';
 import { getExactCreationDate } from '../../helpers/getExactCreateDate';
-import { AddCourses } from '../../store/courses/actions';
 import { AddAuthors } from '../../store/authors/actions';
-import { courseAddPost } from '../../HTTPRequests/courseAddPost';
+import { courseAddPost } from '../../store/courses/thunk';
 import { getAuthorsWithId } from '../../helpers/getAuthorsWithId';
 import { courseUpdatePut } from '../../HTTPRequests/courseUpdatePut';
 
@@ -47,26 +46,21 @@ const CourseForm = ({
       alert('Fill form correctly');
       return;
     }
-
-    courseAddPost(
-      {
-        title,
-        description,
-        duration: Number(duration),
-        authors: correctAuthorsFormat(newCourseAuthors),
-      },
-      user.token
-    );
-    dispatch(
-      AddCourses({
-        id: Math.random().toString(36).substr(2, 9),
-        title,
-        description,
-        creationDate: getExactCreationDate(),
-        duration: Number(duration),
-        authors: correctAuthorsFormat(newCourseAuthors),
-      })
-    );
+    const dispatchUser = {
+      id: Math.random().toString(36).substr(2, 9),
+      title,
+      description,
+      creationDate: getExactCreationDate(),
+      duration: Number(duration),
+      authors: correctAuthorsFormat(newCourseAuthors),
+    };
+    const postUser = {
+      title,
+      description,
+      duration: Number(duration),
+      authors: correctAuthorsFormat(newCourseAuthors),
+    };
+    dispatch(courseAddPost(postUser, user.token, dispatchUser));
     dispatch(AddAuthors(...doubleAuthorCheck(authors, newCourseAuthors)));
   };
 

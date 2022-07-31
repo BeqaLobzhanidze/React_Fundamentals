@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux/es/exports';
-import { authorsAddPost } from '../../HTTPRequests/authorsAddPost';
-import { AddAuthors } from '../../store/authors/actions';
+import { authorsAddPost } from '../../store/authors/thunk';
 
 import CourseForm from './CourseForm';
 
@@ -14,12 +13,12 @@ const CreateCourseWrapper = ({ needUpdate }) => {
   const [customAuthor, setCustomAuthor] = useState('');
   const createAuthor = () => {
     const id = '66cc289e-6de9-49b2-9ca7-8b4f409d6467';
+    const author = { name: customAuthor, id };
     setCopyAuthorList((prevAuthor) => [
       ...prevAuthor,
       { name: customAuthor, id },
     ]);
-    authorsAddPost(customAuthor, user.token);
-    dispatch(AddAuthors({ name: customAuthor, id }));
+    dispatch(authorsAddPost(customAuthor, user.token, author));
     setCustomAuthor('');
   };
 

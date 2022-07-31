@@ -8,7 +8,7 @@ import styles from './CourseCard.module.css';
 import { formatCreationDate } from '../../../../helpers/formatCreationDate';
 import { getCourseDuration } from '../../../../helpers/getCourseDuration';
 import { getAuthors } from '../../../../helpers/getAuthors';
-import { deleteCourseById } from '../../../../HTTPRequests/courseDeleteById';
+import { deleteCourseById } from '../../../../store/courses/thunk';
 
 const CourseCard = ({ courseCard }) => {
   const navigate = useNavigate();
